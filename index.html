@@ -1,163 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Hello Corvin 💫</title>
-  <style>
-    body {
-      font-family: 'Arial', sans-serif;
-      background: url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?fit=crop&w=1600&q=80') no-repeat center center fixed;
-      background-size: cover;
-      color: white;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Journey Through the Galaxy — Intro</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
-    h1 {
-      margin-top: 2em;
-      font-size: 2.5em;
-      text-shadow: 2px 2px 4px #000;
-    }
+  body, html {
+    margin: 0; padding: 0;
+    width: 100%; height: 100%;
+    overflow: hidden;
+    font-family: 'Montserrat', sans-serif;
+    background: radial-gradient(ellipse at bottom, #000010 0%, #000000 100%);
+    color: #E0E8F0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    position: relative;
+  }
 
-    p {
-      font-size: 1.2em;
-      margin-bottom: 1em;
-      text-shadow: 1px 1px 2px #000;
-    }
+  /* Starfield background */
+  #stars, #stars2, #stars3 {
+    position: absolute;
+    width: 100%; height: 100%;
+    top: 0; left: 0;
+    background: transparent;
+    pointer-events: none;
+    z-index: 0;
+  }
 
-    .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 1em;
-      flex-wrap: wrap;
-      margin-bottom: 2em;
-    }
+  #stars {
+    background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/starfield.png') repeat;
+    animation: moveStars 50s linear infinite;
+    opacity: 0.6;
+  }
+  #stars2 {
+    background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/starfield2.png') repeat;
+    animation: moveStars 100s linear infinite;
+    opacity: 0.3;
+  }
+  #stars3 {
+    background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/starfield3.png') repeat;
+    animation: moveStars 150s linear infinite;
+    opacity: 0.15;
+  }
 
-    .btn {
-      padding: 15px 25px;
-      font-size: 1em;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      background-color: #6a5acd;
-      color: white;
-      transition: transform 0.2s ease, background-color 0.2s ease;
-    }
+  @keyframes moveStars {
+    from {background-position: 0 0;}
+    to {background-position: -10000px 5000px;}
+  }
 
-    .btn:hover {
-      background-color: #483d8b;
-      transform: scale(1.1);
-    }
+  /* Main container */
+  .container {
+    z-index: 1;
+    max-width: 700px;
+    background: rgba(5, 5, 20, 0.75);
+    padding: 2em 3em;
+    border-radius: 20px;
+    box-shadow: 0 0 40px #2d2d4a;
+  }
 
-    .message {
-      margin: 1.5em auto;
-      font-size: 1.2em;
-      max-width: 80%;
-      text-shadow: 1px 1px 2px #000;
-    }
+  h1 {
+    font-weight: 700;
+    font-size: 3em;
+    margin-bottom: 0.3em;
+    text-shadow: 0 0 10px #94e0ff;
+  }
 
-    .questions {
-      background-color: rgba(0, 0, 0, 0.6);
-      border-radius: 15px;
-      padding: 20px;
-      margin: 2em auto;
-      max-width: 600px;
-      box-shadow: 0 0 10px rgba(255,255,255,0.2);
-    }
+  p.intro-text {
+    font-size: 1.25em;
+    line-height: 1.5em;
+    margin-bottom: 2em;
+    color: #cbd6e6;
+  }
 
-    .question {
-      margin-bottom: 2em;
-      text-align: left;
-    }
+  button.next-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-size: 1.2em;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 0 15px #764ba2;
+    transition: all 0.3s ease;
+  }
 
-    .question label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 0.5em;
-    }
+  button.next-btn:hover {
+    box-shadow: 0 0 25px #94e0ff;
+    transform: scale(1.05);
+  }
 
-    .question textarea {
-      width: 100%;
-      height: 70px;
-      border-radius: 8px;
-      border: none;
-      padding: 10px;
-      font-family: Arial, sans-serif;
-      font-size: 1em;
-      resize: none;
-    }
+  /* Floating planet */
+  .planet {
+    position: absolute;
+    bottom: 20px;
+    right: 30px;
+    width: 120px;
+    animation: floatPlanet 6s ease-in-out infinite alternate;
+    filter: drop-shadow(0 0 8px #a3cef1);
+    z-index: 2;
+  }
 
-    /* Floating astronaut */
-    .astronaut {
-      position: absolute;
-      top: 20%;
-      left: -200px;
-      width: 150px;
-      animation: floatAstronaut 30s linear infinite;
-    }
+  @keyframes floatPlanet {
+    from {transform: translateY(0);}
+    to {transform: translateY(-20px);}
+  }
 
-    @keyframes floatAstronaut {
-      0% {
-        transform: translateX(-200px) translateY(0);
-      }
-      50% {
-        transform: translateX(calc(100vw + 200px)) translateY(30px);
-      }
-      100% {
-        transform: translateX(-200px) translateY(0);
-      }
-    }
-
-  </style>
+</style>
 </head>
 <body>
-  <!-- Floating Astronaut -->
-  <img src="https://cdn-icons-png.flaticon.com/512/3214/3214567.png" class="astronaut" alt="Astronaut">
 
-  <h1>Hello, Corvin 💌</h1>
-  <p>How are you?</p>
+  <!-- Star layers -->
+  <div id="stars"></div>
+  <div id="stars2"></div>
+  <div id="stars3"></div>
 
-  <div class="buttons">
-    <button class="btn" onclick="showMessage('Just Good? You deserve *amazing*, always.')">Good</button>
-    <button class="btn" onclick="showMessage('Great? That’s the energy I love to see 💖')">Great</button>
-    <button class="btn" onclick="showMessage('Slayable? Babe, you slay *every* day 👑🔥')">Slayable</button>
-    <button class="btn" onclick="showMessage('Alright? I’m sending cuddles your way 🐻')">Alright</button>
+  <div class="container">
+    <h1>Welcome, Corvin 💫</h1>
+    <p class="intro-text">
+      This journey through the galaxy is a special one.<br />
+      Each page you visit is a new cosmic dimension — a part of the universe where your heart’s story unfolds.<br />
+      <strong>Why separate pages?</strong> Because every answer deserves its own space to shine, just like stars in the night sky.<br />
+      So take your time, explore each dimension, and know you’re deeply cherished every step of the way.
+    </p>
+    <button class="next-btn" onclick="goToNextPage()">Enter the Galaxy</button>
   </div>
 
-  <div class="message" id="messageBox"></div>
+  <!-- Floating Planet -->
+  <img class="planet" src="https://cdn-icons-png.flaticon.com/512/1043/1043767.png" alt="Glowing planet" />
 
-  <!-- Questions -->
-  <div class="questions">
-    <div class="question">
-      <label>What’s something you’re still healing from?</label>
-      <textarea placeholder="Type your answer here..."></textarea>
-    </div>
-    <div class="question">
-      <label>What’s a past relationship that taught you something important?</label>
-      <textarea placeholder="Type your answer here..."></textarea>
-    </div>
-    <div class="question">
-      <label>What changed when you met me?</label>
-      <textarea placeholder="Type your answer here..."></textarea>
-    </div>
-    <div class="question">
-      <label>What’s a moment from your childhood that still shapes who you are today?</label>
-      <textarea placeholder="Type your answer here..."></textarea>
-    </div>
-    <div class="question">
-      <label>What does true intimacy mean to you, beyond physical closeness?</label>
-      <textarea placeholder="Type your answer here..."></textarea>
-    </div>
-  </div>
+<script>
+  function goToNextPage() {
+    window.location.href = 'question1.html'; // Next page (you'll create this)
+  }
+</script>
 
-  <script>
-    function showMessage(text) {
-      const messageBox = document.getElementById("messageBox");
-      messageBox.innerHTML = text;
-    }
-  </script>
 </body>
 </html>
